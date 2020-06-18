@@ -95,8 +95,8 @@
       <div class="card-body">
 
         <i class="btn btn-circle fa fa-minus-circle pull-right text-danger" aria-hidden="true"></i>
-        <i class="btn btn-circle fa fa-plus-circle pull-right text-primary" aria-hidden="true"></i>
-        <div class="h3 d-inline">{{i.resource_name}}</div>
+        <i class="btn btn-circle fa fa-plus-circle pull-right text-primary" aria-hidden="true" onclick=incr({{i.resource_id}})></i>
+        <div class="h3 d-inline">{{i.resource_name}},{{i.resource_id}}</div>
         <div class="number d-inline pull-right">{{i.resources_available}}/{{i.count}}</div>
         <!-- <div class="small">Description</div> -->
 
@@ -104,7 +104,7 @@
       </div>
     </div>
     {% endfor %}
-
+    <p id="hello" onclick="incr()">Hello</p>
     <!-- <div class="card bg-light">
       <div class="card-body">
 
@@ -156,7 +156,18 @@
       
       </div>
     </div> -->
-
+        <script>
+          function incr(id){
+            $.ajax({
+              type:"GET",
+              data:{'id':id},
+              url:"{{'/polls/incOne'}}",
+              success:function(data){
+                location.reload()
+              }
+            });
+          }
+        </script>
         
         
         <script
