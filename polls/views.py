@@ -31,3 +31,11 @@ def incOne(request):
     data={'id':id,'c':1})
     res = td.json()
     return JsonResponse(res,safe=False)
+def decOne(request):
+    id = request.GET['id']
+
+    global p
+    td=requests.get('https://sport-resources-booking-api.herokuapp.com//decrementByValue',headers={'Authorization':f'Bearer {p}'},
+    data={'id':id,'c':1})
+    res = td.json()
+    return JsonResponse(res,safe=False)
