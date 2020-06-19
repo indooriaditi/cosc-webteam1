@@ -6,11 +6,12 @@ import requests
 p=''
 # Create your views here.
 def index(request):
-    data=Question.objects.order_by('-pub_date')[:5]
-    context={
-        'question_list':data
-    }
-    return render(request, 'index.html', context)
+    #data=Question.objects.order_by('-pub_date')[:5]
+    #context={
+        #'question_list':data
+    #}
+    #return render(request, 'index.html', context)
+    return ''
 
 def detail(request,question_id):
     return HttpResponse("You are lokking at question %s" % question_id)
@@ -37,5 +38,30 @@ def decOne(request):
     global p
     td=requests.get('https://sport-resources-booking-api.herokuapp.com//decrementByValue',headers={'Authorization':f'Bearer {p}'},
     data={'id':id,'c':1})
+    res = td.json()
+    return JsonResponse(res,safe=False)
+
+def bookingRequests(request):
+    global p
+    data = requests.get("https://sport-resources-booking-api.herokuapp.com/bookingRequests", headers = {'Authorization':f'Bearer {p}'}) 
+    res = data.json()
+    context={'data': res,} 
+    return render(request,'bookingreq.html',context)
+
+def reject(request):
+    id = request.GET['id']
+
+    global p
+    td=requests.get('https://sport-resources-booking-api.herokuapp.com/rejectBooking',headers={'Authorization':f'Bearer {p}'},
+    data={'id':id})
+    res = td.json()
+    return JsonResponse(res,safe=False)
+
+def accept(request):
+    id = request.GET['id']
+    booking_time=request.GET['booking_time']
+    global p
+    td=requests.get('https://sport-resources-booking-api.herokuapp.com/issueResource',headers={'Authorization':f'Bearer {p}'},
+    data={'id':id,'booking_time':booking_time})
     res = td.json()
     return JsonResponse(res,safe=False)
