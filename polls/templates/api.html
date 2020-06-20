@@ -1,9 +1,9 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-	<!-- <link rel="stylesheet" type="text/css" href="app.css"> -->
-    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	      <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	       <!-- <link rel="stylesheet" type="text/css" href="app.css"> -->
+        <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         #content {
         text-align: center;
@@ -73,7 +73,10 @@
             <a class="nav-link" href="{% url 'his' %}">Booking History</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Stats</a>
+            <a class="nav-link" href="{% url 'bookingRequests' %}">Booking Requests</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'blockedUsers' %}">BLocked Users</a>
           </li>
           
         </ul>

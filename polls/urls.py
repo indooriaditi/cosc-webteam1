@@ -8,5 +8,10 @@ urlpatterns=[
 	path('api',views.api_call,name='api'),
 	path('incOne',views.incOne,name='incOne'),
 	path('decOne',views.decOne,name='decOne'),
-	path('his',views.His,name='his')
+	path('his',views.His,name='his'),
+	path('bookingRequests',views.bookingRequests,name='bookingRequests'),
+	path('reject',views.reject,name='reject'),
+	path('accept',views.accept,name='accept'),
+	path('blockedUsers',views.blockedUsers,name='blockedUsers'),
+	path('unblock',views.unblock,name='unblock')
 ]
