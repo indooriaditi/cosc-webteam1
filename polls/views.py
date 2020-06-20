@@ -64,3 +64,20 @@ def accept(request):
     data={'id':id})
     res = td.json()
     return JsonResponse(res,safe=False)
+
+def blockedUsers(request):
+    global p
+    td=requests.get('https://sport-resources-booking-api.herokuapp.com/blockedUsers',headers={'Authorization':f'Bearer {p}'},)
+    res = td.json()
+    context={'data': res,} 
+    return render(request,'blocked.html',context)
+    #return JsonResponse(res,safe=False)
+
+def unblock(request):
+    id = request.GET['id']
+    global p
+    td=requests.get('https://sport-resources-booking-api.herokuapp.com/unblockUser',headers={'Authorization':f'Bearer {p}'},
+    data={'id':id})
+    res = td.json()
+    return JsonResponse(res,safe=False)
+
