@@ -59,9 +59,8 @@ def reject(request):
 
 def accept(request):
     id = request.GET['id']
-    booking_time=request.GET['booking_time']
     global p
     td=requests.get('https://sport-resources-booking-api.herokuapp.com/issueResource',headers={'Authorization':f'Bearer {p}'},
-    data={'id':id,'booking_time':booking_time})
+    data={'id':id})
     res = td.json()
     return JsonResponse(res,safe=False)
