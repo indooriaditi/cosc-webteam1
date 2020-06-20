@@ -39,3 +39,11 @@ def decOne(request):
     data={'id':id,'c':1})
     res = td.json()
     return JsonResponse(res,safe=False)
+def His(request):
+    token = requests.post("https://sport-resources-booking-api.herokuapp.com/login",data={'id': '160118733012','password':'abc123'} )
+    global p
+    p = token.json()['access_token']
+    data = requests.get("https://sport-resources-booking-api.herokuapp.com/bookingHistory", headers = {'Authorization':f'Bearer {p}'}) 
+    res = data.json()
+    context={'data': res,} 
+    return render(request,'his.html',context)
