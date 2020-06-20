@@ -12,6 +12,8 @@ urlpatterns=[
 	path('reject',views.reject,name='reject'),
 	path('accept',views.accept,name='accept'),
 	path('blockedUsers',views.blockedUsers,name='blockedUsers'),
-	path('unblock',views.unblock,name='unblock')
+	path('unblock',views.unblock,name='unblock'),
+	path('bookingHistory',views.bookingHistory,name='bookingHistory'),
+	path('acceptResource',views.acceptResource,name='acceptResource')
 
 ]

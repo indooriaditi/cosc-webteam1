@@ -81,3 +81,19 @@ def unblock(request):
     res = td.json()
     return JsonResponse(res,safe=False)
 
+def bookingHistory(request):
+    global p
+    data1 = requests.get("https://sport-resources-booking-api.herokuapp.com/notreturnedHistory", headers = {'Authorization':f'Bearer {p}'})
+    data2 = requests.get("https://sport-resources-booking-api.herokuapp.com/returnedHistory", headers = {'Authorization':f'Bearer {p}'})
+    res1 = data1.json()
+    res2 = data2.json()
+    context={'data1': res1,'data2':res2} 
+    return render(request,'bookinghis.html',context)
+
+def acceptResource(request):
+    id = request.GET['id']
+    global p
+    td=requests.get('https://sport-resources-booking-api.herokuapp.com/acceptResource',headers={'Authorization':f'Bearer {p}'},
+    data={'id':id})
+    res = td.json()
+    return JsonResponse(res,safe=False)
