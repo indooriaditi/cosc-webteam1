@@ -39,14 +39,6 @@ def decOne(request):
     data={'id':id,'c':1})
     res = td.json()
     return JsonResponse(res,safe=False)
-def His(request):
-    token = requests.post("https://sport-resources-booking-api.herokuapp.com/login",data={'id': '160118733012','password':'abc123'} )
-    global p
-    p = token.json()['access_token']
-    data = requests.get("https://sport-resources-booking-api.herokuapp.com/bookingHistory", headers = {'Authorization':f'Bearer {p}'}) 
-    res = data.json()
-    context={'data': res,} 
-    return render(request,'his.html',context)
 
 def bookingRequests(request):
     token = requests.post("https://sport-resources-booking-api.herokuapp.com/login",data={'id': '160118733012','password':'abc123'} )
@@ -90,3 +82,19 @@ def unblock(request):
     res = td.json()
     return JsonResponse(res,safe=False)
 
+def His(request):
+    global p
+    data1 = requests.get("https://sport-resources-booking-api.herokuapp.com/notreturnedHistory", headers = {'Authorization':f'Bearer {p}'})
+    data2 = requests.get("https://sport-resources-booking-api.herokuapp.com/returnedHistory", headers = {'Authorization':f'Bearer {p}'})
+    res1 = data1.json()
+    res2 = data2.json()
+    context={'data1': res1,'data2':res2} 
+    return render(request,'his.html',context)
+
+def acceptResource(request):
+    id = request.GET['id']
+    global p
+    td=requests.get('https://sport-resources-booking-api.herokuapp.com/acceptResource',headers={'Authorization':f'Bearer {p}'},
+    data={'id':id})
+    res = td.json()
+    return JsonResponse(res,safe=False)
