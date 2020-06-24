@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse,JsonResponse
 # from .models import Question
 import requests
@@ -19,29 +19,31 @@ def login(request):
 
 
 def home(request):
-    id1=request.POST['id']
-    name=request.POST['name']
-    password=request.POST['password']
-    det = { 'id':id1,'name':name,'password':password}
-    token = requests.post("https://sport-resources-booking-api.herokuapp.com/AdminLogin",det)
-    global p
-    p = token.json()['access_token']
-    data = requests.get("https://sport-resources-booking-api.herokuapp.com/ResourcesPresent", headers = {'Authorization':f'Bearer {p}'}) 
-    res = data.json()
-    context={'data': res,} 
-    if p==null:
-        return render(request,'login1.html',context)
-    else:
-        return render(request,'api.html',context)
+    if (request.method)=="POST":
+        id1=request.POST['id']
+        name=request.POST['username']
+        password=request.POST['password']
+        det = { 'id':id1,'name':name,'password':password}
+        token = requests.post("https://sport-resources-booking-api.herokuapp.com/AdminLogin",det)
+        global p
+        p = token.json()['access_token']
+        data = requests.get("https://sport-resources-booking-api.herokuapp.com/ResourcesPresent", headers = {'Authorization':f'Bearer {p}'}) 
+        res = data.json()
+        context={'data': res,}
+        return redirect('api')
 
 def api_call(request):
-    token = requests.post("https://sport-resources-booking-api.herokuapp.com/AdminLogin",data={'id': '12345','name':'Ram','password':'abc12345'} )
     global p
-    p = token.json()['access_token']
-    data = requests.get("https://sport-resources-booking-api.herokuapp.com/ResourcesPresent", headers = {'Authorization':f'Bearer {p}'}) 
-    res = data.json()
-    context={'data': res,} 
-    return render(request,'api.html',context)
+    if(p==''):
+        return redirect('login')
+    else:
+        context={'data': res,} 
+        return render(request,'api.html',context)
+    # token = requests.post("https://sport-resources-booking-api.herokuapp.com/AdminLogin",data={'id': '12345','name':'Ram','password':'abc12345'} )
+    # p = token.json()['access_token']
+    # data = requests.get("https://sport-resources-booking-api.herokuapp.com/ResourcesPresent", headers = {'Authorization':f'Bearer {p}'}) 
+    # res = data.json()
+    
 
 def incOne(request):
     id = request.GET['id']

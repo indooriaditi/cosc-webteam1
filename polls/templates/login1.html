@@ -16,8 +16,9 @@ body{
 </head>
 <body>
 	
-<div class="container>
-	<form action="home" method="POST">
+<div class="container">
+	<form method="POST" action="{%url 'home'%}">
+		{% csrf_token %}
 		<div class="form-group">
 		<label for="id">Id</label>
 		<input type="text" name="id" required class="form-control">
@@ -27,7 +28,8 @@ body{
 		<input type="password" name="password" required class="form-control">
 		</div>
 		<!--<a href="{% url 'api' %}">--> 
-		<input type="submit" value="Submit"></a>
+		<input type="submit" value="Login">
+		<!-- </a> -->
 	</form>
 </div>
 
