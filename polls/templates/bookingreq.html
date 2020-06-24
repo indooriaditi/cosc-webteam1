@@ -22,7 +22,11 @@
         .card{
           margin: 25px 250px;
         }
-
+        .form-inline{
+            margin: 10px 50px 10px 750px;
+            padding: 6px 0;
+            
+          }
 
         .fa-times-circle{
           font-size: 40px;
@@ -37,6 +41,12 @@
   </head>
   <body>
     <h1 class="h1 text-secondary">Booking Requests</h1>
+    <div>
+      <form class="form-inline my-2 my-lg-0" method="GET" action="{%url 'bookingRequests'%}">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" >
+      <button class="btn btn-outline-success my-2 my-sm-0" type='submit'>Search</button>
+      </form>
+      </div>
     {% for i in data %}
     <div class="card bg-light">
       <div class="card-body">

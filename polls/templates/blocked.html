@@ -23,6 +23,11 @@
         .card{
           margin: 25px 250px;
         }
+        .form-inline{
+            margin: 10px 50px 10px 750px;
+            padding: 6px 0;
+            
+          }
 
         .fa-plus{
           font-size: 30px;
@@ -37,6 +42,12 @@
 
     <!--<button class="fa fa-plus pull-right d-inline text-secondary" aria-hidden="true" style="margin-right: 250px; margin-top: 15px; outline: none; background-color: transparent; border: none;"></button>-->
     <h1 class="h1 text-secondary">Blocked users</h1>
+    <div>
+      <form class="form-inline my-2 my-lg-0" method="GET" action="{%url 'blockedUsers'%}">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" >
+      <button class="btn btn-outline-success my-2 my-sm-0" type='submit'>Search</button>
+      </form>
+      </div>
     {% for i in data %}
     <div class="card bg-light">
       <div class="card-body">
