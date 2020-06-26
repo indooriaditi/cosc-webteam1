@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse,JsonResponse
 # from .models import Question
 import requests
+import base64
 
 p=''
 # Create your views here.
@@ -46,9 +47,9 @@ def bookingRequests(request):
     search_term = ''
     if 'search' in request.GET:
         search_term = request.GET['search']
-    data = requests.get("https://sport-resources-booking-api.herokuapp.com/bookingRequests", headers = {'Authorization':f'Bearer {p}'},
+    td = requests.get("http://127.0.0.1:5000/bookingRequests", headers = {'Authorization':f'Bearer {p}'},
     data={'search':search_term}) 
-    res = data.json()
+    res = td.json()
     context={'data': res,} 
     return render(request,'bookingreq.html',context)
 
@@ -118,3 +119,13 @@ def bookingHistory(request):
     res2 = data2.json()
     context={'data1': res1,'data2':res2} 
     return render(request,'bookinghis.html',context)
+
+def timetable(request):
+    global p
+    td = requests.get("https://sport-resources-booking-api.herokuapp.com/timetable", headers = {'Authorization':f'Bearer {p}'},
+    data={'branch':'cse','year':2,'section':1}) 
+    res = td.json()
+    #res[0]['section1']=base64.b64decode(res[0]['section1'])
+    context={'data':res,} 
+    #print(context)
+    return render(request,'timetable.html',context)
