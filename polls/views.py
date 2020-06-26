@@ -47,7 +47,7 @@ def bookingRequests(request):
     search_term = ''
     if 'search' in request.GET:
         search_term = request.GET['search']
-    td = requests.get("http://127.0.0.1:5000/bookingRequests", headers = {'Authorization':f'Bearer {p}'},
+    td = requests.get("https://sport-resources-booking-api.herokuapp.com/bookingRequests", headers = {'Authorization':f'Bearer {p}'},
     data={'search':search_term}) 
     res = td.json()
     context={'data': res,} 
@@ -120,7 +120,7 @@ def bookingHistory(request):
     context={'data1': res1,'data2':res2} 
     return render(request,'bookinghis.html',context)
 
-def timetable(request):
+'''def timetable(request):
     global p
     td = requests.get("https://sport-resources-booking-api.herokuapp.com/timetable", headers = {'Authorization':f'Bearer {p}'},
     data={'branch':'cse','year':2,'section':1}) 
@@ -128,4 +128,19 @@ def timetable(request):
     #res[0]['section1']=base64.b64decode(res[0]['section1'])
     context={'data':res,} 
     #print(context)
-    return render(request,'timetable.html',context)
+    return render(request,'timetable.html',context)'''
+
+def timetable(request):
+    global p
+    if (('branch' in request.GET) and ('year' in request.GET) and ('section' in request.GET)):
+        print(1)
+        branch = request.GET['branch']
+        year = request.GET['year']
+        section = request.GET['section']
+        data1 = requests.get("https://sport-resources-booking-api.herokuapp.com/timetable", headers = {'Authorization':f'Bearer {p}'},
+        data={'branch':branch,'year':year,'section':section})
+        data1 = data1.json()
+        context={'data': data1,}
+        return render(request,'timetable.html',context)
+    else:
+        return render(request,'timetable.html')

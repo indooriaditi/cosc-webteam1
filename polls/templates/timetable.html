@@ -28,7 +28,7 @@
           margin: 25px 250px;
         }
         .form-inline{
-            margin: 10px 50px 10px 750px;
+            margin: 50px 50px 50px 200px;
             padding: 6px 0;
             
           }
@@ -37,15 +37,42 @@
           font-size: 30px;
         }
 
-
     </style>
 
-    <title>Blocked users</title>
+    <title>Timetable</title>
   </head>
   <body>
 
     <!--<button class="fa fa-plus pull-right d-inline text-secondary" aria-hidden="true" style="margin-right: 250px; margin-top: 15px; outline: none; background-color: transparent; border: none;"></button>-->
     <h1 class="h1 text-secondary">TIMETABLE</h1>
+    <form class="form-inline my-2 my-lg-0" method="GET" action="{%url 'timetable'%}">
+      <p>
+      <select placeholder="Branch" name="branch">
+        <option disabled selected>Branch</option>
+        <option>CSE</option>
+        <option>IT</option>  
+        <option>ECE</option>
+        <option>EEE</option>
+        <option>CIVIL</option>
+        <option>MECHANICAL</option>
+        <option>CHEMICAL</option>
+      </select>
+      <select placeholder="Year" name="year">
+        <option disabled selected>Year</option>
+        <option> 1 </option>
+        <option> 2 </option>  
+        <option> 3 </option>
+        <option> 4 </option>
+      </select>
+      <select placeholder="Section" name="section">
+        <option disabled selected>Section</option>
+        <option> 1 </option>
+        <option> 2 </option>  
+        <option> 3 </option>
+      </select>
+      <button class="btn btn-outline-success my-2 my-sm-0" type='submit'>Submit</button>
+      </p>
+      </form>
     {% for i in data %}
     <div>
     <img src="data:image/png;charset=utf-8;base64,{{i.time_table}}">
