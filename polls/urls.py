@@ -6,6 +6,7 @@ urlpatterns=[
 	#path('index',views.index,name='index'),
 	#path('<int:question_id>/',views.detail,name='detail'),
 	path('',views.login,name='login'),
+	path('invalid_login',views.invalid_login,name='login'),
 	path('home',views.home,name='home'),
 	path('api',views.api_call,name='api'),
 	path('about',views.about,name='about'),

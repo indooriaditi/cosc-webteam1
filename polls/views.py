@@ -14,9 +14,13 @@ p=''
 
 #def detail(request,question_id):
 #   return HttpResponse("You are lokking at question %s" % question_id)
+
+
 def login(request):
     return render(request,'login1.html')
 
+def invalid_login(request):
+    return render(request,'invalid_login.html')
 
 def home(request):
     if (request.method)=="POST":
@@ -27,14 +31,14 @@ def home(request):
         token = requests.post("https://sport-resources-booking-api.herokuapp.com/AdminLogin",det)
         global p
         p = token.json()['access_token']
-        data = requests.get("https://sport-resources-booking-api.herokuapp.com/ResourcesPresent", headers = {'Authorization':f'Bearer {p}'}) 
-        res = data.json()
-        context={'data': res,}
-        
-        #if(res.status_code==201):
-        return redirect('api')
-        #else:
-         #   return redirect('login')
+        if(p=="Invalid Credentials"):
+            return redirect('invalid_login')
+            #return HttpResponse(p)
+        else:
+            data = requests.get("https://sport-resources-booking-api.herokuapp.com/ResourcesPresent", headers = {'Authorization':f'Bearer {p}'}) 
+            res = data.json()
+            context={'data': res,}
+            return redirect('api')
 
 def api_call(request):
     global p
