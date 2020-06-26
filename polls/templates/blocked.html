@@ -9,6 +9,7 @@
     <style>
       
         .h1{
+          color:red;
           margin: 50px 50px 50px 250px;
           
         }
@@ -20,7 +21,12 @@
         .fa-plus{
           font-size: 30px;
         }
-
+        body{
+        background: url(https://images.unsplash.com/photo-1486286701208-1d58e9338013?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80);
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
 
     </style>
 
@@ -49,12 +55,12 @@
         <a class="nav-link" href="{% url 'bookingRequests' %}">Booking Requests</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'blockedUsers' %}">BLocked Users</a>
+        <a class="nav-link" href="{% url 'blockedUsers' %}">Blocked Users</a>
       </li>
       
     </ul>
     <ul class="nav navbar-nav navbar-right">
-        <li class="nav-item"><a class="nav-link" href ="#">logout </a></li>
+        <li class="nav-item"><a class="nav-link" href ="{% url 'logout' %}">logout </a></li>
         <!-- <li class="nav-item"><a class="nav-link"href ="#">Login <i class="fa fa-user-plus" aria-hidden="true"></i></a></li> -->
     </ul>
   </div>
@@ -64,7 +70,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div id="content">
-                <h1 class="h1 text-secondary">BLocked Users</h1>
+                <h1 class="h1 text-secondary">Blocked Users</h1>
     <!--<button class="fa fa-plus pull-right d-inline text-secondary" aria-hidden="true" style="margin-right: 250px; margin-top: 15px; outline: none; background-color: transparent; border: none;"></button>-->
     {% for i in data %}
     <div class="card bg-light">
@@ -77,19 +83,6 @@
       </div>
     </div>
     {% endfor %} 
-    <!--<div class="card bg-light">
-      <div class="card-body">
-
-        <button class="btn btn-secondary pull-right" style="border-radius: 20px; height: 40px; width: 125px; margin-top: 6px;">Unblock</button>
-        <div class="h3 d-inline">Resource Name</div>
-        <div class="small">Student name - Roll Number</div>
-      
-      </div>
-    </div>-->
-
-    
-
-    <!-- Bootstrap JS -->
     <script>
       function unblock(id){
         $.ajax({

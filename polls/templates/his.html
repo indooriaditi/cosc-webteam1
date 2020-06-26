@@ -30,7 +30,11 @@
           line-height: 1.428571429;
           border-radius: 15px;
         }
-
+        body{
+        background: url(https://images.unsplash.com/photo-1486286701208-1d58e9338013?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80);
+        background-size: cover;
+        background-position: center;
+    }
 
     </style>
 
@@ -59,12 +63,12 @@
         <a class="nav-link" href="{% url 'bookingRequests' %}">Booking Requests</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'blockedUsers' %}">BLocked Users</a>
+        <a class="nav-link" href="{% url 'blockedUsers' %}">Blocked Users</a>
       </li>
       
     </ul>
     <ul class="nav navbar-nav navbar-right">
-        <li class="nav-item"><a class="nav-link" href ="#">logout </a></li>
+        <li class="nav-item"><a class="nav-link" href ="{% url 'logout' %}">logout </a></li>
         <!-- <li class="nav-item"><a class="nav-link"href ="#">Login <i class="fa fa-user-plus" aria-hidden="true"></i></a></li> -->
     </ul>
   </div>
@@ -83,7 +87,7 @@
                     <button class="btn btn-danger pull-right" style="border-radius: 20px; height: 40px; margin-top: 6px;" onclick=acceptResource({{i.user_id}})>Not returned</button>
                     <div class="h3 d-inline">{{i.resource_name}}</div>
                     <div class="small">{{i.name}} - {{i.user_id}}</div>
-                  
+                    
                   </div>
                 </div>
                 {% endfor %} 

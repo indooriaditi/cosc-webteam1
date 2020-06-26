@@ -11,14 +11,18 @@ body{
 	background: url(https://p7cdn4static.sharpschool.com/UserFiles/Servers/Server_92830/Image/News%20images/101287275.jpg) ;
 	background-size: cover;
 	background-position: center;
-	background-repeat: no-repeat;
-	background-attachment: fixed;
+}
+h3{
+    background-color: yellow;
 }
 </style>
 </head>
 <body>
+    <div class="container">
+        <h3>You have been succesfully logged out.<br>You will be required to log in again  before you can access the protected pages.</h3>
+    </div>	
 <div class="container">
-	<form method="POST" action="{%url 'home'%}">
+    <form method="POST" action="{%url 'home'%}">
 		{% csrf_token %}
 		<div class="form-group">
 		<label for="id" style="color:white">Id</label>
@@ -33,7 +37,7 @@ body{
 		<!-- </a> -->
 	</form>
 </div>
-</div>
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

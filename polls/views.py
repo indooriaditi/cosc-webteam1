@@ -30,20 +30,25 @@ def home(request):
         data = requests.get("https://sport-resources-booking-api.herokuapp.com/ResourcesPresent", headers = {'Authorization':f'Bearer {p}'}) 
         res = data.json()
         context={'data': res,}
+        
+        #if(res.status_code==201):
         return redirect('api')
+        #else:
+         #   return redirect('login')
 
 def api_call(request):
     global p
+    token = requests.post("https://sport-resources-booking-api.herokuapp.com/AdminLogin",data={'id': '12345','name':'Ram','password':'abc12345'} )
+    p = token.json()['access_token']
+    data = requests.get("https://sport-resources-booking-api.herokuapp.com/ResourcesPresent", headers = {'Authorization':f'Bearer {p}'}) 
+    res = data.json()
     if(p==''):
         return redirect('login')
     else:
         context={'data': res,} 
         return render(request,'api.html',context)
-    # token = requests.post("https://sport-resources-booking-api.herokuapp.com/AdminLogin",data={'id': '12345','name':'Ram','password':'abc12345'} )
-    # p = token.json()['access_token']
-    # data = requests.get("https://sport-resources-booking-api.herokuapp.com/ResourcesPresent", headers = {'Authorization':f'Bearer {p}'}) 
-    # res = data.json()
-    
+def about(request):
+    return render(request,'about.html')
 
 def incOne(request):
     id = request.GET['id']
@@ -121,3 +126,6 @@ def acceptResource(request):
     data={'id':id})
     res = td.json()
     return JsonResponse(res,safe=False)
+
+def logout(request):
+    return render(request,'logout.html')
