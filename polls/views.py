@@ -2,7 +2,10 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse,JsonResponse
 # from .models import Question
 import requests
-
+from django.contrib import auth
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import cache_control,never_cache
+from django.utils.cache import add_never_cache_headers
 p=''
 # Create your views here.
 #def index(request):
@@ -17,11 +20,12 @@ p=''
 
 
 def login(request):
-    return render(request,'login1.html')
+    context={'data':''}
+    return render(request,'login1.html',context)
 
-def invalid_login(request):
-    return render(request,'invalid_login.html')
-
+#def invalid_login(request):
+    #return render(request,'invalid_login.html')
+@never_cache
 def home(request):
     if (request.method)=="POST":
         id1=request.POST['id']
@@ -31,28 +35,51 @@ def home(request):
         token = requests.post("https://sport-resources-booking-api.herokuapp.com/AdminLogin",det)
         global p
         p = token.json()['access_token']
-        if(p=="Invalid Credentials"):
-            return redirect('invalid_login')
+        print('post')
+        return redirect('home')
+        '''if(p=="Invalid credentials"):
+            context={'data':"INVALID CREDENTIALS"}
+            return render(request,'login1.html',context)'''
             #return HttpResponse(p)
-        else:
+        '''else:
             data = requests.get("https://sport-resources-booking-api.herokuapp.com/ResourcesPresent", headers = {'Authorization':f'Bearer {p}'}) 
             res = data.json()
             context={'data': res,}
-            return redirect('resources')
-
+            return redirect('resources')'''
+    elif (request.method)=="GET":
+        if(p):
+            if(p=="Invalid credentials"):
+                print('invalid')
+                context={'data':"INVALID CREDENTIALS"}
+                return render(request,'login1.html',context)
+            #return HttpResponse(p)
+            else:
+                print('valid')
+                data = requests.get("https://sport-resources-booking-api.herokuapp.com/ResourcesPresent", headers = {'Authorization':f'Bearer {p}'}) 
+                res = data.json()
+                context={'data': res,}
+                return redirect('resources')
+        else:
+            return redirect('login')
+@never_cache
 def api_call(request):
     global p
-    token = requests.post("https://sport-resources-booking-api.herokuapp.com/AdminLogin",data={'id': '12345','name':'Ram','password':'abc12345'} )
-    p = token.json()['access_token']
-    data = requests.get("https://sport-resources-booking-api.herokuapp.com/ResourcesPresent", headers = {'Authorization':f'Bearer {p}'}) 
-    res = data.json()
-    if(p==''):
-        return redirect('login')
+    if(p):
+        data = requests.get("https://sport-resources-booking-api.herokuapp.com/ResourcesPresent", headers = {'Authorization':f'Bearer {p}'}) 
+        res = data.json()
+        if(p==''):
+            return redirect('login')
+        else:
+            context={'data': res,} 
+            return render(request,'api.html',context)
     else:
-        context={'data': res,} 
-        return render(request,'api.html',context)
+        return redirect('login')
+@never_cache
 def about(request):
-    return render(request,'about.html')
+    if(p):
+        return render(request,'about.html')
+    else:
+        return redirect('login')
 
 def incOne(request):
     id = request.GET['id']
@@ -71,17 +98,20 @@ def decOne(request):
     data={'id':id,'c':1})
     res = td.json()
     return JsonResponse(res,safe=False)
-
+@never_cache
 def bookingRequests(request):
     global p
-    search_term = ''
-    if 'search' in request.GET:
-        search_term = request.GET['search']
-    td = requests.get("https://sport-resources-booking-api.herokuapp.com/bookingRequests", headers = {'Authorization':f'Bearer {p}'},
-    data={'search':search_term}) 
-    res = td.json()
-    context={'data': res,} 
-    return render(request,'bookingreq.html',context)
+    if(p):
+        search_term = ''
+        if 'search' in request.GET:
+            search_term = request.GET['search']
+        td = requests.get("https://sport-resources-booking-api.herokuapp.com/bookingRequests", headers = {'Authorization':f'Bearer {p}'},
+        data={'search':search_term}) 
+        res = td.json()
+        context={'data': res,} 
+        return render(request,'bookingreq.html',context)
+    else:
+        return redirect('login')
 
 def reject(request):
     id = request.GET['id']
@@ -99,17 +129,20 @@ def accept(request):
     data={'id':id})
     res = td.json()
     return JsonResponse(res,safe=False)
-
+@never_cache
 def blockedUsers(request):
     global p
-    search_term = ''
-    if 'search' in request.GET:
-        search_term = request.GET['search']
-    td=requests.get('https://sport-resources-booking-api.herokuapp.com/blockedUsers',headers={'Authorization':f'Bearer {p}'},
-    data={'search':search_term})
-    res = td.json()
-    context={'data': res,}
-    return render(request,'blocked.html',context)
+    if(p):
+        search_term = ''
+        if 'search' in request.GET:
+            search_term = request.GET['search']
+        td=requests.get('https://sport-resources-booking-api.herokuapp.com/blockedUsers',headers={'Authorization':f'Bearer {p}'},
+        data={'search':search_term})
+        res = td.json()
+        context={'data': res,}
+        return render(request,'blocked.html',context)
+    else:
+        return redirect('login')
     #return JsonResponse(res,safe=False)
 
 def unblock(request):
@@ -119,19 +152,22 @@ def unblock(request):
     data={'id':id})
     res = td.json()
     return JsonResponse(res,safe=False)
-
+@never_cache
 def bookingHistory(request):
     global p
-    search_term = ''
-    if 'search' in request.GET:
-        search_term = request.GET['search']
-    data1 = requests.get("https://sport-resources-booking-api.herokuapp.com/notreturnedHistory", headers = {'Authorization':f'Bearer {p}'},
-    data={'search':search_term})
-    data2 = requests.get("https://sport-resources-booking-api.herokuapp.com/returnedHistory", headers = {'Authorization':f'Bearer {p}'})
-    res1 = data1.json()
-    res2 = data2.json()
-    context={'data1': res1,'data2':res2} 
-    return render(request,'his.html',context)
+    if(p):
+        search_term = ''
+        if 'search' in request.GET:
+            search_term = request.GET['search']
+        data1 = requests.get("https://sport-resources-booking-api.herokuapp.com/notreturnedHistory", headers = {'Authorization':f'Bearer {p}'},
+        data={'search':search_term})
+        data2 = requests.get("https://sport-resources-booking-api.herokuapp.com/returnedHistory", headers = {'Authorization':f'Bearer {p}'})
+        res1 = data1.json()
+        res2 = data2.json()
+        context={'data1': res1,'data2':res2} 
+        return render(request,'his.html',context)
+    else:
+        return redirect('login')
 
 def acceptResource(request):
     id = request.GET['id']
@@ -140,20 +176,26 @@ def acceptResource(request):
     data={'id':id})
     res = td.json()
     return JsonResponse(res,safe=False)
-
+@never_cache
 def logout(request):
-    return render(request,'logout.html')
-
+    auth.logout(request)
+    global p
+    p=0
+    return redirect('login')
+@never_cache
 def timetable(request):
     global p
-    if (('branch' in request.GET) and ('year' in request.GET) and ('section' in request.GET)):
-        branch = request.GET['branch']
-        year = request.GET['year']
-        section = request.GET['section']
-        data1 = requests.get("https://sport-resources-booking-api.herokuapp.com/timetable", headers = {'Authorization':f'Bearer {p}'},
-        data={'branch':branch,'year':year,'section':section})
-        data1 = data1.json()
-        context={'data': data1,}
-        return render(request,'timetable.html',context)
+    if(p):
+        if (('branch' in request.GET) and ('year' in request.GET) and ('section' in request.GET)):
+            branch = request.GET['branch']
+            year = request.GET['year']
+            section = request.GET['section']
+            data1 = requests.get("https://sport-resources-booking-api.herokuapp.com/timetable", headers = {'Authorization':f'Bearer {p}'},
+            data={'branch':branch,'year':year,'section':section})
+            data1 = data1.json()
+            context={'data': data1,}
+            return render(request,'timetable.html',context)
+        else:
+            return render(request,'timetable.html')
     else:
-        return render(request,'timetable.html')
+        return redirect('login')

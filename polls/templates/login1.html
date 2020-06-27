@@ -14,12 +14,16 @@ body{
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 }
+p{
+	background-color: tomato;
+}
 </style>
 </head>
 <body>
 <div class="container">
-	<form method="POST" action="{%url 'login'%}">
+	<form method="POST" action="{%url 'home'%}">
 		{% csrf_token %}
+		<p>{{data}}</p>
 		<div class="form-group">
 		<label for="id" style="color:white">Id</label>
 		<input type="text" name="id" style="height:30px; width:400px" placeholder="Enter Id" required class="form-control">

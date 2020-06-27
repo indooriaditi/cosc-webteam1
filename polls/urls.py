@@ -5,8 +5,8 @@ from . import views
 urlpatterns=[
 	#path('index',views.index,name='index'),
 	#path('<int:question_id>/',views.detail,name='detail'),
-	path('',views.login,name='login'),
-	path('invalid_login',views.invalid_login,name='login'),
+	path('login',views.login,name='login'),
+	#path('invalid_login',views.invalid_login,name='login'),
 	path('home',views.home,name='home'),
 	path('resources',views.api_call,name='resources'),
 	path('about',views.about,name='about'),
