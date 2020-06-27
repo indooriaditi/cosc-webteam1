@@ -11,11 +11,11 @@
         color:Black;
     }
     
-    body{
+    /* body{
         background: url(https://images.unsplash.com/photo-1486286701208-1d58e9338013?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80);
         background-size: cover;
         background-position: center;
-    }
+    } */
     .btn{
         background-color: #FFFFFF;
     }
@@ -67,7 +67,7 @@
           <!-- <li class="nav-item active">
             <a class="nav-link" href="#">Home </a>
           </li> -->
-          <li class="nav-item">
+          <li class="nav-item active">
             <a class="nav-link" href="{% url 'about' %}">About</a>
           </li>
           <li class="nav-item">
@@ -90,14 +90,14 @@
       </div>
     </div> 
     </nav>
-    <div class="container"></div>
-    <h2 style="color:black">About</h1>
-        <ul style="color:rgb(45 , 6, 134)" >
-            <li> Sports Resources Booking Application is the management of all the resources of an organization.<br></li>
-            <li>The Admin can add and delete the resources when required.<br></li>
-            <li>Available resources are requested to issue by the users and the admin can accept or reject the booking request based on the blocked users list.<br></li>
-            <li> When the users do not return the resources or lose the item then they are blocked until the user pays the fine.<br></li>
-            <li>The fines are collected manually by the admin and the users  are unblocked.</li>
+    <div class="container">
+    <h1 class="mt-4 pt-4" style="color:black">About</h1>
+        <ul class="mt-4 text-muted" style="font-size: 19px;">
+            <li><p>Sports Resources Booking Application is the management of all the resources of an organization.</p></li>
+            <li><p>The Admin can add and delete the resources when required.<br></li>
+            <li><p>Available resources are requested to issue by the users and the admin can accept or reject the booking request based on the blocked users list.</p></li>
+            <li><p>When the users do not return the resources or lose the item then they are blocked until the user pays the fine.</p></li>
+            <li><p>The fines are collected manually by the admin and the users  are unblocked.</p></li>
         </ul>
     </div>
         <script

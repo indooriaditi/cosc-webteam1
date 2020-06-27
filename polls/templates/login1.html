@@ -7,36 +7,41 @@
 <!-- JS, Popper.js, and jQuery -->
 
 <style>
-body{
-	background: url(https://p7cdn4static.sharpschool.com/UserFiles/Servers/Server_92830/Image/News%20images/101287275.jpg) ;
+	body{
+	background: url(http://hdwpro.com/wp-content/uploads/2016/04/Sports-Basketball-Wallpaper.jpg) ;
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
-	background-attachment: fixed;
-}
-p{
-	background-color: tomato;
-}
+	}
+	p{
+		background-color: tomato;
+	}
 </style>
 </head>
 <body>
-<div class="container">
+<div class="container pt-5">
+	<div class="row mt-5 pt-5">
+	<div class="col-5" style="border-radius: 10px;">
+	</div>
+	<div class="col-6 my-4 p-4">
+	<center><h1 class="text-white mb-4">Sports Dashboard</h1></center>
 	<form method="POST" action="{%url 'home'%}">
 		{% csrf_token %}
 		<p>{{data}}</p>
 		<div class="form-group">
-		<label for="id" style="color:white">Id</label>
-		<input type="text" name="id" style="height:30px; width:400px" placeholder="Enter Id" required class="form-control">
-		<label for="name"  style="color:white">Username</label>
-		<input type="text" name="username" style="height:30px; width:400px" placeholder="Enter Username" required class="form-control">
-		<label for="password" style="color:white">Password</label>
-		<input type="password" name="password" placeholder="Enter Password" style="height:30px; width:400px" required class="form-control">
+		<!-- <label for="id" style="color:white">Id</label> -->
+		<input type="text" name="id" placeholder="Id" required class="form-control my-2">
+		<!-- <label for="name"  style="color:white">Username</label> -->
+		<input type="text" name="username" placeholder="Username" required class="form-control my-2">
+		<!-- <label for="password" style="color:white">Password</label> -->
+		<input type="password" name="password" placeholder="Password" required class="form-control my-2">
 		</div>
 		<!--<a href="{% url 'resources' %}">-->
-		<input type="submit" style="background-color:green" value="Login">
+		<center><input class="btn col-6 text-black font-weight-bold" type="submit" value="Login" style="background-color:  #b3412b; font-size: 18px;"></center>
 		<!-- </a> -->
 	</form>
-</div>
+	</div>
+	</div>
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 

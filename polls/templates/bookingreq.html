@@ -12,7 +12,7 @@
         }
 
         .card{
-          margin: 25px 250px;
+          margin: 25px 0px;
         }
 
 
@@ -28,9 +28,10 @@
         background-attachment: fixed;
         }
         .form-inline{
-              margin: 10px 50px 10px 750px;
-              padding: 6px 0;
+              /* margin: 10px 50px 10px 750px;
+              padding: 6px 0; */
               
+              float: right;
             }
 
     </style>
@@ -63,7 +64,7 @@
                 <a class="nav-link" href="{% url 'bookingHistory' %}">Booking History</a>
               </li>
       
-              <li class="nav-item">
+              <li class="nav-item active">
                 <a class="nav-link" href="{% url 'bookingRequests' %}">Booking Requests</a>
               </li>
 
@@ -91,15 +92,16 @@
   
     </nav>
 
-                
-    <h1 class="h1 text-white">Booking Requests</h1>
+    
+    <div class="container">            
+    <h1 class="mt-4 pt-4">Booking Requests</h1>
     <div>
       <form class="form-inline my-2 my-lg-0" method="GET" action="{%url 'bookingRequests'%}">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" >
       <button class="btn btn-outline-success my-2 my-sm-0" type='submit'>Search</button>
       </form>
       </div>
-    
+    <br>
     {% for i in data %}
     <div class="card bg-light">
       <div class="card-body">
@@ -113,6 +115,7 @@
       </div>
     </div> 
     {% endfor %} 
+    </div>
     <!--<button class="btn btn-primary pull-right" style="border-radius: 20px; height: 40px; margin-top: 6px;">Accept <span class="fa fa-check" aria-hidden="true" onclick=reject({{i.user_id}}></span></button>
         <div class="h3 d-inline">{{i.resource_name}}</div> var time=12+":"+today.getMinutes()+":"+today.getSeconds();-->
 

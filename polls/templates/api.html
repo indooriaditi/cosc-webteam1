@@ -24,7 +24,7 @@
     }
 
     .card{
-        margin: 25px 250px;
+        margin: 25px 0px;
     }
 
     .fa-plus-circle{
@@ -106,7 +106,6 @@
 
 
                 
-                <h1 class="h1 text-white">Resources</h1>
 
 <!--<div class="text-center">
 
@@ -142,21 +141,20 @@
       <a class="dropdown-item" href="#">2</a>
       <a class="dropdown-item" href="#">3</a>
     </div>
-  	</div>-->
+    </div>
+  </div> -->
 
-</div>
-
+  <div class="container">
+    <h1 class="mt-4 pt-4">Resources</h1>
     {% for i in data %}
     <div class="card bg-light">
-      <div class="card-body">
+      <div class="card-body px-5">
 
-        <i class="btn btn-circle fa fa-minus-circle pull-right text-danger" aria-hidden="true" onclick=decr({{i.resource_id}})></i>
-        <i class="btn btn-circle fa fa-plus-circle pull-right text-primary" aria-hidden="true" onclick=incr({{i.resource_id}})></i>
-        <div class="h3 d-inline">{{i.resource_name}},{{i.resource_id}}</div>
-        <div class="number d-inline pull-right">{{i.resources_available}}/{{i.count}}</div>
+        <i class="btn btn-circle fa fa-minus-circle pull-right text-danger pl-2" aria-hidden="true" onclick=decr({{i.resource_id}})></i>
+        <i class="btn btn-circle fa fa-plus-circle pull-right text-primary pr-2" aria-hidden="true" onclick=incr({{i.resource_id}})></i>
+        <div class="h3 d-inline">{{i.resource_name}}</div><br>
+        <div class="d-inline">( {{i.resources_available}} / {{i.count}} )</div>
         <!-- <div class="small">Description</div> -->
-
-      
       </div>
     </div>
     {% endfor %}
@@ -184,6 +182,6 @@
             });
           }
         </script>
-
+    </div>
     </body>
 </html>
