@@ -22,7 +22,7 @@
           padding-right: 0;
         }
         body{
-        background: url(https://images.unsplash.com/photo-1486286701208-1d58e9338013?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80);
+        background: url("bg1.webp");
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
@@ -31,15 +31,38 @@
     </style>
 
     <title>Booking Requests</title>
+  
   </head>
-  <body>
+  
+<body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-  <a class="navbar-brand" href="#">Sports Resources</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+      
+      <div class="container">
+        
+        <a class="navbar-brand" href="#">Sports Resources</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
 
+<<<<<<< HEAD
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            
+            <ul class="navbar-nav mr-auto">
+              <!-- <li class="nav-item active">
+              <a class="nav-link" href="#">Home </a>
+              </li> -->
+              <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+              </li>
+      
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'his' %}">Booking History</a>
+              </li>
+      
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'bookingRequests' %}">Booking Requests</a>
+              </li>
+=======
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <!-- <li class="nav-item active">
@@ -57,20 +80,29 @@
       <li class="nav-item">
         <a class="nav-link" href="{% url 'blockedUsers' %}">Blocked Users</a>
       </li>
+>>>>>>> c5740145cd6e6ccf14de9b57ba735b6b975c3f50
       
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-        <li class="nav-item"><a class="nav-link" href ="{% url 'logout' %}">logout </a></li>
-        <!-- <li class="nav-item"><a class="nav-link"href ="#">Login <i class="fa fa-user-plus" aria-hidden="true"></i></a></li> -->
-    </ul>
-  </div>
-</div> 
-</nav>
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12">
-            <div id="content">
-                <h1 class="h1 text-secondary">Booking Requests</h1>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'blockedUsers' %}">Blocked Users</a>
+              </li>
+      
+            </ul>
+    
+            <ul class="nav navbar-nav navbar-right">
+              
+              <li class="nav-item"><a class="nav-link" href ="{% url 'logout' %}">Logout</a></li>
+              <!-- <li class="nav-item"><a class="nav-link"href ="#">Login <i class="fa fa-user-plus" aria-hidden="true"></i></a></li> -->
+            
+             </ul>
+  
+          </div>
+
+      </div> 
+  
+    </nav>
+
+                
+                <h1 class="h1 text-white">Booking Requests</h1>
     
     {% for i in data %}
     <div class="card bg-light">
