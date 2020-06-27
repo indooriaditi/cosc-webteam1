@@ -25,7 +25,13 @@
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
-    }
+        }
+      .form-inline{
+              margin: 10px 50px 10px 750px;
+              padding: 6px 0;
+              
+            }
+
 
     </style>
 
@@ -39,7 +45,7 @@
       
       <div class="container">
         
-        <a class="navbar-brand" href="#">Sports Resources</a>
+        <a class="navbar-brand" href="{% url 'resources' %}">Sports Resources</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
@@ -52,11 +58,11 @@
               <a class="nav-link" href="#">Home </a>
               </li> -->
               <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
+                <a class="nav-link" href="{% url 'about' %}">About</a>
               </li>
       
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'his' %}">Booking History</a>
+                <a class="nav-link" href="{% url 'bookingHistory' %}">Booking History</a>
               </li>
       
               <li class="nav-item">
@@ -66,7 +72,10 @@
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'blockedUsers' %}">Blocked Users</a>
               </li>
-      
+              
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'timetable' %}">Timetable</a>
+              </li>
             </ul>
     
             <ul class="nav navbar-nav navbar-right">
@@ -83,7 +92,13 @@
     </nav>
 
                 
-                <h1 class="h1 text-white">Blocked Users</h1>
+      <h1 class="h1 text-white">Blocked Users</h1>
+      <div>
+        <form class="form-inline my-2 my-lg-0" method="GET" action="{%url 'blockedUsers'%}">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" >
+        <button class="btn btn-outline-success my-2 my-sm-0" type='submit'>Search</button>
+        </form>
+        </div>
                 <!--<button class="fa fa-plus pull-right d-inline text-secondary" aria-hidden="true" style="margin-right: 250px; margin-top: 15px; outline: none; background-color: transparent; border: none;"></button>-->
     
     {% for i in data %}

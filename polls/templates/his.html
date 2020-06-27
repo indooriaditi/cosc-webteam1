@@ -34,7 +34,13 @@
         background: url("bg1.webp");
         background-size: cover;
         background-position: center;
-    }
+        }
+
+        .form-inline{
+            margin: 10px 50px 10px 750px;
+            padding: 6px 0;
+            
+          }
 
     </style>
 
@@ -47,7 +53,7 @@
       
       <div class="container">
         
-        <a class="navbar-brand" href="#">Sports Resources</a>
+        <a class="navbar-brand" href="{% url 'resources' %}">Sports Resources</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
@@ -59,11 +65,11 @@
               <a class="nav-link" href="#">Home </a>
               </li> -->
               <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
+                <a class="nav-link" href="{% url 'about' %}">About</a>
               </li>
       
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'his' %}">Booking History</a>
+                <a class="nav-link" href="{% url 'bookingHistory' %}">Booking History</a>
               </li>
       
               <li class="nav-item">
@@ -73,7 +79,9 @@
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'blockedUsers' %}">Blocked Users</a>
               </li>
-  
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'timetable' %}">Timetable</a>
+              </li>
       
             </ul>
     
@@ -93,6 +101,12 @@
 
                 
                 <h1 class="h1 text-white">Booking History</h1>
+                <div>
+                  <form class="form-inline my-2 my-lg-0" method="GET" action="{%url 'bookingHistory'%}">
+                  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" >
+                  <button class="btn btn-outline-success my-2 my-sm-0" type='submit'>Search</button>
+                  </form>
+                  </div>
                 
                 {% for i in data1 %}
                 <div class="card bg-light">
@@ -101,7 +115,7 @@
                     <button class="btn btn-circle btn-outline-danger pull-right" aria-hidden="true" style="border-radius: 20px; height: 40px; width: 40px; margin-top: 6px; margin-left: 10px;"><i class="fa fa-bell" aria-hidden="true"></i></button>
                     <button class="btn btn-danger pull-right" style="border-radius: 20px; height: 40px; margin-top: 6px;" onclick=acceptResource({{i.user_id}})>Not returned</button>
                     <div class="h3 d-inline">{{i.resource_name}}</div>
-                    <div class="small">{{i.name}} - {{i.user_id}}</div>
+                    <div class="small">{{i.name}} - {{i.user_id}} {{i.day}}</div>
                     
                   </div>
                 </div>

@@ -60,7 +60,7 @@
       
       <div class="container">
         
-        <a class="navbar-brand" href="#">Sports Resources</a>
+        <a class="navbar-brand" href="{% url 'resources' %}">Sports Resources</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
@@ -72,11 +72,11 @@
               <a class="nav-link" href="#">Home </a>
               </li> -->
               <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
+                <a class="nav-link" href="{% url 'about' %}">About</a>
               </li>
       
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'his' %}">Booking History</a>
+                <a class="nav-link" href="{% url 'bookingHistory' %}">Booking History</a>
               </li>
       
               <li class="nav-item">
@@ -86,7 +86,9 @@
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'blockedUsers' %}">Blocked Users</a>
               </li>
-      
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'timetable' %}">Timetable</a>
+              </li>
             </ul>
     
             <ul class="nav navbar-nav navbar-right">
@@ -106,7 +108,7 @@
                 
                 <h1 class="h1 text-white">Resources</h1>
 
-<div class="text-center">
+<!--<div class="text-center">
 
 	<div class="dropdown d-inline">
     <button type="button" class="btn btn-primary dropdown-toggle btn-lg" data-toggle="dropdown">
@@ -140,7 +142,7 @@
       <a class="dropdown-item" href="#">2</a>
       <a class="dropdown-item" href="#">3</a>
     </div>
-  	</div>
+  	</div>-->
 
 </div>
 
@@ -158,63 +160,6 @@
       </div>
     </div>
     {% endfor %}
-<<<<<<< HEAD
-    <!-- <p id="hello" onclick="incr()">Hello</p> -->
-    <!-- <div class="card bg-light">
-      <div class="card-body">
-
-        <i class="btn btn-circle fa fa-minus-circle pull-right text-danger" aria-hidden="true"></i>
-        <i class="btn btn-circle fa fa-plus-circle pull-right text-primary" aria-hidden="true"></i>
-        <div class="h3 d-inline">Resource Name</div>
-        <div class="number d-inline pull-right">40/60</div>
-        <div class="small">Description</div>
-
-      
-      </div>
-    </div>
-
-    <div class="card bg-light">
-      <div class="card-body">
-
-        <i class="btn btn-circle fa fa-minus-circle pull-right text-danger" aria-hidden="true"></i>
-        <i class="btn btn-circle fa fa-plus-circle pull-right text-primary" aria-hidden="true"></i>
-        <div class="h3 d-inline">Resource Name</div>
-        <div class="number d-inline pull-right">40/60</div>
-        <div class="small">Description</div>
-
-      
-      </div>
-    </div>
-
-    <div class="card bg-light">
-      <div class="card-body">
-
-        <i class="btn btn-circle fa fa-minus-circle pull-right text-danger" aria-hidden="true"></i>
-        <i class="btn btn-circle fa fa-plus-circle pull-right text-primary" aria-hidden="true"></i>
-        <div class="h3 d-inline">Resource Name</div>
-        <div class="number d-inline pull-right">40/60</div>
-        <div class="small">Description</div>
-
-      
-      </div>
-    </div>
-
-    <div class="card bg-light">
-      <div class="card-body">
-
-        <i class="btn btn-circle fa fa-minus-circle pull-right text-danger" aria-hidden="true"></i>
-        <i class="btn btn-circle fa fa-plus-circle pull-right text-primary" aria-hidden="true"></i>
-        <div class="h3 d-inline">Resource Name</div>
-        <div class="number d-inline pull-right">40/60</div>
-        <div class="small">Description</div>
-
-      
-      </div>
-    </div> -->
-
-
-=======
->>>>>>> c5740145cd6e6ccf14de9b57ba735b6b975c3f50
         <script>
           function incr(id){
             $.ajax({

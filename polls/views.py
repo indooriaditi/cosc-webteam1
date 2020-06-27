@@ -38,7 +38,7 @@ def home(request):
             data = requests.get("https://sport-resources-booking-api.herokuapp.com/ResourcesPresent", headers = {'Authorization':f'Bearer {p}'}) 
             res = data.json()
             context={'data': res,}
-            return redirect('api')
+            return redirect('resources')
 
 def api_call(request):
     global p
@@ -73,11 +73,13 @@ def decOne(request):
     return JsonResponse(res,safe=False)
 
 def bookingRequests(request):
-    token = requests.post("https://sport-resources-booking-api.herokuapp.com/login",data={'id': '160118733012','password':'abc123'} )
     global p
-    p = token.json()['access_token']
-    data = requests.get("https://sport-resources-booking-api.herokuapp.com/bookingRequests", headers = {'Authorization':f'Bearer {p}'}) 
-    res = data.json()
+    search_term = ''
+    if 'search' in request.GET:
+        search_term = request.GET['search']
+    td = requests.get("https://sport-resources-booking-api.herokuapp.com/bookingRequests", headers = {'Authorization':f'Bearer {p}'},
+    data={'search':search_term}) 
+    res = td.json()
     context={'data': res,} 
     return render(request,'bookingreq.html',context)
 
@@ -100,9 +102,13 @@ def accept(request):
 
 def blockedUsers(request):
     global p
-    td=requests.get('https://sport-resources-booking-api.herokuapp.com/blockedUsers',headers={'Authorization':f'Bearer {p}'},)
+    search_term = ''
+    if 'search' in request.GET:
+        search_term = request.GET['search']
+    td=requests.get('https://sport-resources-booking-api.herokuapp.com/blockedUsers',headers={'Authorization':f'Bearer {p}'},
+    data={'search':search_term})
     res = td.json()
-    context={'data': res,} 
+    context={'data': res,}
     return render(request,'blocked.html',context)
     #return JsonResponse(res,safe=False)
 
@@ -114,9 +120,13 @@ def unblock(request):
     res = td.json()
     return JsonResponse(res,safe=False)
 
-def His(request):
+def bookingHistory(request):
     global p
-    data1 = requests.get("https://sport-resources-booking-api.herokuapp.com/notreturnedHistory", headers = {'Authorization':f'Bearer {p}'})
+    search_term = ''
+    if 'search' in request.GET:
+        search_term = request.GET['search']
+    data1 = requests.get("https://sport-resources-booking-api.herokuapp.com/notreturnedHistory", headers = {'Authorization':f'Bearer {p}'},
+    data={'search':search_term})
     data2 = requests.get("https://sport-resources-booking-api.herokuapp.com/returnedHistory", headers = {'Authorization':f'Bearer {p}'})
     res1 = data1.json()
     res2 = data2.json()
@@ -133,3 +143,17 @@ def acceptResource(request):
 
 def logout(request):
     return render(request,'logout.html')
+
+def timetable(request):
+    global p
+    if (('branch' in request.GET) and ('year' in request.GET) and ('section' in request.GET)):
+        branch = request.GET['branch']
+        year = request.GET['year']
+        section = request.GET['section']
+        data1 = requests.get("https://sport-resources-booking-api.herokuapp.com/timetable", headers = {'Authorization':f'Bearer {p}'},
+        data={'branch':branch,'year':year,'section':section})
+        data1 = data1.json()
+        context={'data': data1,}
+        return render(request,'timetable.html',context)
+    else:
+        return render(request,'timetable.html')
