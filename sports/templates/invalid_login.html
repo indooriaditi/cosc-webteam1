@@ -15,7 +15,7 @@ body{
 	background-attachment: fixed;
 }
 p{
-	background-color: tomato;
+	background-color:red;
 }
 </style>
 </head>
@@ -24,7 +24,7 @@ p{
 <div class="container">
 	<form method="POST" action="{%url 'home'%}">
 		{% csrf_token %}
-		<p> Invalid Credentials!!! Please login again</p>
+		
 		<div class="form-group">
 		<label for="id" style="color:white">Id</label>
 		<input type="text" name="id" style="height:30px; width:400px" placeholder="Enter Id" required class="form-control">
@@ -36,6 +36,7 @@ p{
 		<!--<a href="{% url 'resources' %}">--> 
 		<input type="submit" style="background-color:green" value="Login">
 		<!-- </a> -->
+		<p> Invalid Credentials!!! Please login again.</p>
 	</form>
 </div>
 </div>
