@@ -181,7 +181,8 @@ def logout(request):
     auth.logout(request)
     global p
     p=0
-    return redirect('login')
+    context={'data':"You logged out successfully"}
+    return render(request,'login1.html',context)
 @never_cache
 def timetable(request):
     global p

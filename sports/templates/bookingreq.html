@@ -125,7 +125,7 @@
             $.ajax({
               type:"GET",
               data:{'id':id},
-              url:"{{'/polls/reject'}}",
+              url:"{{'/sports/reject'}}",
               success:function(data){
                 location.reload()
               }
@@ -137,7 +137,7 @@
             $.ajax({
               type:"GET",
               data:{'id':id},
-              url:"{{'/polls/accept'}}",
+              url:"{{'/sports/accept'}}",
               success:function(data){
                 location.reload()
               }
