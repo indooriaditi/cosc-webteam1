@@ -35,12 +35,11 @@ def home(request):
         token = requests.post("https://sport-resources-booking-api.herokuapp.com/AdminLogin",det)
         global p
         p = token.json()['access_token']
-        print('post')
         return redirect('home')
         '''if(p=="Invalid credentials"):
             context={'data':"INVALID CREDENTIALS"}
-            return render(request,'login1.html',context)'''
-            #return HttpResponse(p)
+            return render(request,'login1.html',context)
+            return HttpResponse(p)'''
         '''else:
             data = requests.get("https://sport-resources-booking-api.herokuapp.com/ResourcesPresent", headers = {'Authorization':f'Bearer {p}'}) 
             res = data.json()
