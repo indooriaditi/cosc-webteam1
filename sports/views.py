@@ -61,6 +61,18 @@ def home(request):
                 return redirect('resources')
         else:
             return redirect('login')
+
+def updatePassword(request):
+    if (request.method)=="POST":
+        new_pword=request.POST['password']
+        confirm_pword=request.POST['confirm_password']
+        td=requests.get('https://sport-resources-booking-api.herokuapp.com/updatePassword',headers={'Authorization':f'Bearer {p}'},
+        data={'password':new_pword,'confirm_password':confirm_pword})
+        res = td.json()
+        context={'data': res,} 
+        return render(request,'api.html',context)
+    else:
+        return redirect('home')
 @never_cache
 def api_call(request):
     global p
@@ -144,6 +156,13 @@ def blockedUsers(request):
     else:
         return redirect('login')
     #return JsonResponse(res,safe=False)
+def blockUsers(request):
+    id = request.GET['id']
+    global p
+    td=requests.get('https://sport-resources-booking-api.herokuapp.com/blockUser',headers={'Authorization':f'Bearer {p}'},
+    data={'id':id})
+    res = td.json()
+    return JsonResponse(res,safe=False)
 
 def unblock(request):
     id = request.GET['id']
