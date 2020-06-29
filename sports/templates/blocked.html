@@ -95,6 +95,13 @@
     <div class="container">          
       <h1 class="mt-4 pt-4">Blocked Users</h1>
       <div>
+        <form class="form-inline my-2 my-lg-0" method="GET" action="{%url 'blockUsers'%}">
+          <label for="blockUser">Enter UserId</label>
+        <input class="form-control mr-sm-2" type="text" placeholder="Enter UserId to block"  name="id" >
+        <button class="btn btn-outline-success my-2 my-sm-0" type='submit'>Submit</button>
+        </form>
+        </div>
+      <div>
         <form class="form-inline my-2 my-lg-0" method="GET" action="{%url 'blockedUsers'%}">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" >
         <button class="btn btn-outline-success my-2 my-sm-0" type='submit'>Search</button>
