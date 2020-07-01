@@ -171,9 +171,10 @@ def blockedUsers(request):
 def blockUsers(request):
     id=''
     id = request.GET['id']
+    fine = request.GET['fine']
     global p
     td=requests.get('https://sport-resources-booking-api.herokuapp.com/blockUser',headers={'Authorization':f'Bearer {p}'},
-    data={'id':id})
+    data={'id':id,'fine':fine})
     res = td.json()
     return redirect('blockedUsers')
 
