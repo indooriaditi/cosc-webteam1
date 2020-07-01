@@ -88,11 +88,19 @@
     
             <ul class="nav navbar-nav navbar-right">
               
-              <li class="nav-item"><a class="nav-link" href ="{% url 'logout' %}">Logout</a></li>
+              <!--<li class="nav-item"><a class="nav-link" href ="{% url 'logout' %}">Logout</a></li>-->
+              <div class="bs-example">
+              <div class="btn-group-vertical">
+                  <div class="btn-group">
+                      <button id="butn-1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Account</button>
+                      <div class="dropdown-menu">
+                          <a href="{% url 'updatePassword' %}" class="dropdown-item">Change Password</a>
+                          <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>
+                      </div>
+                  </div>
               <!-- <li class="nav-item"><a class="nav-link"href ="#">Login <i class="fa fa-user-plus" aria-hidden="true"></i></a></li> -->
             
              </ul>
-  
           </div>
 
       </div> 
@@ -110,26 +118,38 @@
         </form>
         </div>
       <br>
-      {% for i in data1 %}
+      {% for i in data2 %}
       <div class="card bg-light">
         <div class="card-body">
 
-          <button class="btn btn-circle btn-outline-danger pull-right" aria-hidden="true" style="border-radius: 20px; height: 40px; width: 40px; margin-top: 6px; margin-left: 10px;"><i class="fa fa-bell" aria-hidden="true"></i></button>
-          <button class="btn btn-danger pull-right" style="border-radius: 20px; height: 40px; margin-top: 6px;" onclick=acceptResource({{i.user_id}})>Not returned</button>
+          <!--<button class="btn btn-circle btn-outline-danger pull-right" aria-hidden="true" style="border-radius: 20px; height: 40px; width: 40px; margin-top: 6px; margin-left: 10px;"><i class="fa fa-bell" aria-hidden="true"></i></button>-->
+          <button class="btn btn-danger pull-right" style="border-radius: 20px; height: 40px; width: 125px; margin-top: 6px;" onclick=acceptResource({{i.user_id}})>{{i.booking_time}}</button>
           <div class="h3 d-inline">{{i.resource_name}}</div>
-          <div class="small">{{i.name}} - {{i.user_id}} {{i.day}}</div>
+          <div class="small">{{i.name}} - {{i.user_id}}</div>
           
         </div>
       </div>
       {% endfor %} 
 
-      {% for j in data2 %}
+      {% for j in data1 %}
       <div class="card bg-light">
         <div class="card-body">
 
-          <button class="btn btn-primary pull-right" style="border-radius: 20px; height: 40px; width: 125px; margin-top: 6px;">Returned</button>
+          <button class="btn btn-danger pull-right" style="border-radius: 20px; height: 40px; width: 125px; margin-top: 6px;" onclick=acceptResource({{j.user_id}})>{{j.day}}</button>
           <div class="h3 d-inline">{{j.resource_name}}</div>
           <div class="small">{{j.name}} -{{j.user_id}}</div>
+        
+        </div>
+      </div>
+      {% endfor %}
+
+      {% for k in data3 %}
+      <div class="card bg-light">
+        <div class="card-body">
+
+          <button class="btn btn-primary pull-right" style="border-radius: 20px; height: 40px; width: 125px; margin-top: 6px;">{{k.return_time}}</button>
+          <div class="h3 d-inline">{{k.resource_name}}</div>
+          <div class="small">{{k.name}} -{{k.user_id}}</div>
         
         </div>
       </div>

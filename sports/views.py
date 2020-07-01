@@ -178,6 +178,15 @@ def blockUsers(request):
     res = td.json()
     return redirect('blockedUsers')
 
+def add_resource(request):
+    name = request.POST['name']
+    count = int(request.POST['count'])
+    global p
+    td=requests.post('https://sport-resources-booking-api.herokuapp.com/AddExtraResource',headers={'Authorization':f'Bearer {p}'},
+    data={'name':name,'count':count})
+    res = td.json()
+    return redirect('home')
+
 def unblock(request):
     id = request.GET['id']
     global p
@@ -194,10 +203,13 @@ def bookingHistory(request):
             search_term = request.GET['search']
         data1 = requests.get("https://sport-resources-booking-api.herokuapp.com/notreturnedHistory", headers = {'Authorization':f'Bearer {p}'},
         data={'search':search_term})
-        data2 = requests.get("https://sport-resources-booking-api.herokuapp.com/returnedHistory", headers = {'Authorization':f'Bearer {p}'})
+        data2 = requests.get("https://sport-resources-booking-api.herokuapp.com/notreturnedToday", headers = {'Authorization':f'Bearer {p}'},
+        data={'search':search_term})
+        data3 = requests.get("https://sport-resources-booking-api.herokuapp.com/returnedHistory", headers = {'Authorization':f'Bearer {p}'})
         res1 = data1.json()
         res2 = data2.json()
-        context={'data1': res1,'data2':res2} 
+        res3 = data3.json()
+        context={'data1': res1,'data2':res2,'data3':res3} 
         return render(request,'his.html',context)
     else:
         return redirect('login')

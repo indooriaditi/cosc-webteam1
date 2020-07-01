@@ -22,5 +22,6 @@ urlpatterns=[
 	path('blockUsers',views.blockUsers,name='blockUsers'),
 	path('unblock',views.unblock,name='unblock'),
 	path('logout',views.logout,name='logout'),
-	path('timetable',views.timetable,name='timetable')
+	path('timetable',views.timetable,name='timetable'),
+	path('add_resource',views.add_resource,name='add_resource')
 ]
