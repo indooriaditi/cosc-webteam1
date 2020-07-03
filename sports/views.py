@@ -60,24 +60,27 @@ def home(request):
                 return redirect('resources')
         else:
             return redirect('login')
-
+@never_cache
 def cPassword(request):
-    if (request.method)=="POST":
-        id1=int(request.POST['id1'])
-        pword=request.POST['old_password']
-        new_pword=request.POST['password']
-        confirm_pword=request.POST['confirm_password']
-        if(new_pword==confirm_pword):
-            td=requests.post('https://sport-resources-booking-api.herokuapp.com/admin_change_password',headers={'Authorization':f'Bearer {p}'},
-            data={'id':id1,'password':pword,'new_password':confirm_pword})
-            res = td.json()
-            context={'data':res['message']}
-            return render(request,'updatePassword.html',context)
+    if(p):
+        if (request.method)=="POST":
+            id1=int(request.POST['id1'])
+            pword=request.POST['old_password']
+            new_pword=request.POST['password']
+            confirm_pword=request.POST['confirm_password']
+            if(new_pword==confirm_pword):
+                td=requests.post('https://sport-resources-booking-api.herokuapp.com/admin_change_password',headers={'Authorization':f'Bearer {p}'},
+                data={'id':id1,'password':pword,'new_password':confirm_pword})
+                res = td.json()
+                context={'data1':res['message']}
+                return render(request,'updatePassword.html',context)
+            else:
+                context={"data1":"confirm password doesn't match with your new password"}
+                return render(request,'updatePassword.html',context)
         else:
-            context={"data":"confirm password doesn't match with your new password"}
-            return render(request,'updatePassword.html',context)
+            return redirect('home')
     else:
-        return redirect('home')
+            return redirect('login')
 @never_cache
 def api_call(request):
     global p

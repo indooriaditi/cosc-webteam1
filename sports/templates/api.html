@@ -12,12 +12,12 @@
     
     <style>
     
-    /* body{
+    /*body{
         background: url(https://images.unsplash.com/photo-1486286701208-1d58e9338013?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80);
         background-size: cover;
         background-position: center;
-    } */
-
+        background-attachment: fixed;
+        } */
     .h1{
         margin: 50px 50px 50px 250px;
         
@@ -44,13 +44,7 @@
         padding-right: 20px;
     }
 
-	.dropdown{
-		margin: 25px;
-      }
-      .bs-example {
-      position: absolute;
-      float:inline-end;
-    } 
+	
   .buttonRight{
         position: absolute;
         bottom: 0;
@@ -95,7 +89,6 @@
         margin-bottom:10px;
         opacity: 0.8;
       }
-
       /* Add a red background color to the cancel button */
       .form-container .cancel {
         background-color: rgba(255, 0, 0, 0.746);
@@ -115,104 +108,64 @@
     
 <body>
         
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
       
-      <div class="container">
-        <a class="navbar-brand" href="{% url 'resources' %}">Sports Resources</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-        </button>
+    <div class="container">
+      
+      <a class="navbar-brand" href="{% url 'resources' %}">Sports Resources</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
 
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          
+          <ul class="navbar-nav mr-auto">
+            <!-- <li class="nav-item active">
+            <a class="nav-link" href="#">Home </a>
+            </li> -->
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'about' %}">About</a>
+            </li>
+    
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'bookingHistory' %}">Booking History</a>
+            </li>
+    
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'bookingRequests' %}">Booking Requests</a>
+            </li>
+    
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'blockedUsers' %}">Blocked Users</a>
+            </li>
             
-            <ul class="navbar-nav mr-auto">
-              <!-- <li class="nav-item active">
-              <a class="nav-link" href="#">Home </a>
-              </li> -->
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'about' %}">About</a>
-              </li>
-      
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'bookingHistory' %}">Booking History</a>
-              </li>
-      
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'bookingRequests' %}">Booking Requests</a>
-              </li>
-      
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'blockedUsers' %}">Blocked Users</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'timetable' %}">Timetable</a>
-              </li>
-            </ul> 
-          <!--<div class="nav navbar-nav navbar-right">
-              <div class="bs-example">
-                <div class="btn-group-vertical">
-                    <div class="btn-group">
-                        <button id="butn-1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Account</button>
-                        <div class="dropdown-menu">
-                            <a href="{% url 'updatePassword' %}" class="dropdown-item">Change Password</a>
-                        </div>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'timetable' %}">Timetable</a>
+            </li>
+          </ul>
+    
+          <ul class="nav navbar-nav navbar-right">
+            
+            <!--<li class="nav-item"><a class="nav-link" href ="{% url 'logout' %}">Logout</a></li>-->
+            <div class="bs-example">
+            <div class="btn-group-vertical">
+                <div class="btn-group">
+                    <button id="butn-1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Account</button>
+                    <div class="dropdown-menu">
+                        <a href="{% url 'updatePassword' %}" class="dropdown-item">Change Password</a>
+                        <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>
                     </div>
                 </div>
-              </div>
-            </div>-->
-            <div class="nav navbar-nav navbar-right">
-              <li class="nav-item"><a class="nav-link" href ="{% url 'logout' %}">Logout</a></li>
-              <!-- <li class="nav-item"><a class="nav-link"href ="#">Login <i class="fa fa-user-plus" aria-hidden="true"></i></a></li> -->
-              <div class="bs-example">
-              <div class="btn-group-vertical">
-                  <div class="btn-group">
-                      <button id="butn-1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Account</button>
-                      <div class="dropdown-menu">
-                          <a href="{% url 'updatePassword' %}" class="dropdown-item">Change Password</a>
-                          <!--<div class="dropdown-item">
-                          <div class="buttonRight">
-                            <button type="button" class="btn btn-success btn-circle btn-xl" onclick="openForm()" >
-                            <i class="fa fa-plus" aria-hidden="true" ></i>
-                            </button>
-                          </div>
-                          <div class="form-popup" id="myForm" style="display:none">
-                            <form method="POST" action="{%url 'add_resource'%}" class="form-container" >
-                              {% csrf_token %}
-                              <label for="name"><b>Name</b></label>
-                              <input type="text" placeholder="Enter Resource name" name="name" required>
-                              <br>
-                              <label for="count"><b>Count</b></label>
-                              <input type="text" placeholder="Enter the Count" name="count" required>
-                            
-                              <button type="submit" class="btn">Submit</button>
-                              <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-                            </form>
-                          </div>-->
-                          <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>
-                          <!--<a href="javascript:void(0)" class="dropdown-item" onclick="openForm1()">Change Password</a>-->
-                          <!--<div class="dropdown-item dropdown-form" id="myForm1" style="display:none">-->
-                          <!--<div class="form-popup" id="myForm1" style="display:none">-->
-                            <!--<form method="POST" action="{%url 'add_resource'%}" class="form-container" >
-                              {% csrf_token %}
-                              <label for="name"><b>Name</b></label>
-                              <input type="text" placeholder="Enter Resource name" name="name" required>
-                              <br>
-                              <label for="count"><b>Count</b></label>
-                              <input type="text" placeholder="Enter the Count" name="count" required>
-                            
-                              <button type="submit" class="btn">Submit</button>
-                              <button type="button" class="btn cancel" onclick="closeForm1()">Close</button>
-                            </form>
-                          </div>-->
-                    </div>
-                  </div>
-              </div>
-            </div>
-            </div>
+            <!-- <li class="nav-item"><a class="nav-link"href ="#">Login <i class="fa fa-user-plus" aria-hidden="true"></i></a></li> -->
+          
+           </ul>
+
         </div>
-      </div>
-    </div>
-    </nav>
+
+    </div> 
+
+  </nav>
 
   <div class="container">
     <h1 class="mt-4 pt-4">Resources</h1>
@@ -281,15 +234,6 @@
             document.getElementById("myForm").style.display = "none";
           }
           </script>
-          <script>
-            function openForm1() {
-              document.getElementById("myForm1").style.display = "block";
-            }
-            
-            function closeForm1() {
-              document.getElementById("myForm1").style.display = "none";
-            }
-            </script>
     </div>
     </body>
 </html>
